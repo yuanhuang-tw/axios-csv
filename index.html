@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 得獎名單 -->
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《國中組得獎名單》</caption>
+    <thead>
+      <tr>
+        <th>領獎序號</th>
+        <th>名次</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+      </tr>
+    </thead>
+    <tbody id="winner-a"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《普高組得獎名單》</caption>
+    <thead>
+      <tr>
+        <th>領獎序號</th>
+        <th>名次</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+      </tr>
+    </thead>
+    <tbody id="winner-b"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《技高組得獎名單》</caption>
+    <thead>
+      <tr>
+        <th>領獎序號</th>
+        <th>名次</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+      </tr>
+    </thead>
+    <tbody id="winner-c"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《特別組得獎名單》</caption>
+    <thead>
+      <tr>
+        <th>領獎序號</th>
+        <th>名次</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+      </tr>
+    </thead>
+    <tbody id="winner-d"></tbody>
+  </table>
+
+  <hr>
+
+  <!-- 決賽晉級名單 -->
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《國中組決賽晉級名單》</caption>
+    <thead>
+      <tr>
+        <th>編號</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+        <th>Youtube 參賽影片</th>
+      </tr>
+    </thead>
+    <tbody id="final-a"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《普高組決賽晉級名單》</caption>
+    <thead>
+      <tr>
+        <th>編號</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+        <th>Youtube 參賽影片</th>
+      </tr>
+    </thead>
+    <tbody id="final-b"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《技高組決賽晉級名單》</caption>
+    <thead>
+      <tr>
+        <th>編號</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+        <th>Youtube 參賽影片</th>
+      </tr>
+    </thead>
+    <tbody id="final-c"></tbody>
+  </table>
+
+  <table border="1" class="news-table w-100 mb-3">
+    <caption class="fw-bold">《特別組決賽晉級名單》</caption>
+    <thead>
+      <tr>
+        <th>編號</th>
+        <th>學校</th>
+        <th>學生姓名</th>
+        <th>Youtube 參賽影片</th>
+      </tr>
+    </thead>
+    <tbody id="final-d"></tbody>
+  </table>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // 得獎名單
+    const winners = ['winner-a', 'winner-b', 'winner-c', 'winner-d'];
+
+    winners.forEach(winner => {
+      axios
+        .get(`${winner}.csv`)
+        .then(res => {
+          const tableData = res.data.split('\r\n');
+
+          document.querySelector(`#${winner}`).innerHTML = tableData.reduce(
+            (acc, data) => {
+              let tr = data.split(',').reduce((acc, td) => {
+                return acc += `<td>${td}</td>`;
+              }, '<tr>');
+
+              tr += '</tr>';
+
+              return acc += tr;
+            },
+            ''
+          );
+        })
+        .catch(err => console.error(err));
+    });
+
+    // 決賽晉級名單
+    const finals = ['final-a', 'final-b', 'final-c', 'final-d'];
+
+    finals.forEach(final => {
+      axios
+        .get(`${final}.csv`)
+        .then(res => {
+          const tableData = res.data.split('\r\n');
+
+          document.querySelector(`#${final}`).innerHTML = tableData.reduce(
+            (acc, data) => {
+              let tr = data.split(',').reduce((acc, td, index) => {
+                if (index === 3) {
+                  td = `<a href="${td}" target="_blank">影片連結</a>`;
+                }
+
+                return acc += `<td>${td}</td>`;
+              }, '<tr>');
+
+              tr += '</tr>';
+
+              return acc += tr;
+            },
+            ''
+          );
+        })
+        .catch(err => console.error(err));
+    });
+  </script>
+</body>
+</html>
