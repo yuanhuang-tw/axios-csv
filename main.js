@@ -9,13 +9,14 @@ winners.forEach((winner) => {
 
       document.querySelector(`#${winner}`).innerHTML = tableData.reduce(
         (acc, data) => {
-          let tr = data.split(',').reduce((acc, td) => {
-            return (acc += `<td>${td}</td>`);
-          }, '<tr>');
+          let tr = data.split(',').reduce(
+            (acc, td) => acc += `<td>${td}</td>`,
+            '<tr>'
+          );
 
           tr += '</tr>';
 
-          return (acc += tr);
+          return acc += tr;
         },
         ''
       );
@@ -34,17 +35,20 @@ finals.forEach((final) => {
 
       document.querySelector(`#${final}`).innerHTML = tableData.reduce(
         (acc, data) => {
-          let tr = data.split(',').reduce((acc, td, index) => {
-            if (index === 3) {
-              td = `<a href="${td}" target="_blank">影片連結</a>`;
-            }
+          let tr = data.split(',').reduce(
+            (acc, td, index) => {
+              if (index === 3) {
+                td = `<a href="${td}" target="_blank">影片連結</a>`;
+              }
 
-            return (acc += `<td>${td}</td>`);
-          }, '<tr>');
+              return acc += `<td>${td}</td>`;
+            },
+            '<tr>'
+          );
 
           tr += '</tr>';
 
-          return (acc += tr);
+          return acc += tr;
         },
         ''
       );

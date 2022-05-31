@@ -1,0 +1,24 @@
+{
+  "name": "axios-csv",
+  "version": "1.0.0",
+  "description": "讀取 csv 檔，把資料顯示到 table。",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuanhuang-tw/axios-csv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuanhuang-tw/axios-csv/issues"
+  },
+  "homepage": "https://github.com/yuanhuang-tw/axios-csv#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
