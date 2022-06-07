@@ -5,7 +5,7 @@ winners.forEach((winner) => {
   axios
     .get(`${winner}.csv`)
     .then((res) => {
-      const tableData = res.data.split('\r\n');
+      const tableData = res.data.split(/\r?\n|\r/);
 
       document.querySelector(`#${winner}`).innerHTML = tableData.reduce(
         (acc, data) => {
@@ -31,7 +31,7 @@ finals.forEach((final) => {
   axios
     .get(`${final}.csv`)
     .then((res) => {
-      const tableData = res.data.split('\r\n');
+      const tableData = res.data.split(/\r?\n|\r/);
 
       document.querySelector(`#${final}`).innerHTML = tableData.reduce(
         (acc, data) => {
